@@ -1,17 +1,28 @@
 var gulp          = require('gulp');
+var childProcess  = require('child_process');
+var shell         = require('gulp-shell');
 var browserSync   = require('browser-sync');
-var sass          = require('gulp-sass');
-var prefix        = require('gulp-autoprefixer');
-var cp            = require('child_process');
+// var cp            = require('child_process');
 const plumber     = require('gulp-plumber');
 const newer       = require('gulp-newer');
-const pug         = require('pug');
 const jfm         = require('jstransformer-jade-jekyll');
+const minify      = require('gulp-minify');
+const pug         = require('pug');
 var gulpPug       = require('gulp-pug');
 
+var prefix        = require('gulp-autoprefixer');
+var sass          = require('gulp-sass');
 var csso          = require('gulp-csso');
+var htmlmin       = require('gulp-htmlmin');
+var jsValidate    = require('gulp-jsvalidate');
 var uglify        = require('gulp-uglify');
 var pump          = require('pump');
+
+var scsslint      = require('gulp-scss-lint');
+var bootlint      = require('gulp-bootlint');
+var html5Lint     = require('gulp-html5-lint');
+var htmlhint      = require("gulp-htmlhint");
+
 var imagemin      = require('gulp-imagemin');
 var imageminSvgo  = require('imagemin-svgo');
 var imageop       = require('gulp-image-optimization');
@@ -28,8 +39,8 @@ var messages = {
 
 // Set the browser that you want to support
 const AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
+  'ie >= 8',
+  'ie_mob >= 8',
   'ff >= 30',
   'chrome >= 34',
   'safari >= 7',
@@ -38,6 +49,8 @@ const AUTOPREFIXER_BROWSERS = [
   'android >= 4.4',
   'bb >= 10'
 ];
+
+
 
 /**
  * Pug Configurations
@@ -50,9 +63,10 @@ pug.filters.jfm = jfm.render;
  */
 gulp.task('jekyll-build', function (done) {
     browserSync.notify(messages.jekyllBuild);
-    return cp.spawn( jekyll , ['build'], {stdio: 'inherit'})
+    return childProcess.spawn( jekyll , ['build'], {stdio: 'inherit'})
         .on('close', done);
 });
+
 
 
 /**
@@ -61,6 +75,7 @@ gulp.task('jekyll-build', function (done) {
 gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
     browserSync.reload();
 });
+
 
 
 /**
@@ -75,76 +90,40 @@ gulp.task('browser-sync', ['sass', 'jekyll-build'], function() {
     });
 });
 
-/**
- * Javascript Minifyer
- */
-// gulp.task('compress', function() {
-//   gulp.src('lib/*.js')
-//     .pipe(minify({
-//         ext:{
-//             src:'-debug.js',
-//             min:'.js'
-//         },
-//         exclude: ['tasks'],
-//         ignoreFiles: ['.combo.js', '-min.js']
-//     }))
-//     .pipe(gulp.dest('dist'))
+
+
+
+// gulp.task('jekyll', function(cb) {
+//     var child = childProcess.exec('jekyll build', function(error, stdout, stderr) {
+//         cb(error);
+//     });
 // });
 
 
-/**
- * Automatic Image Compressor
- */
-//gulp.task('image', function(){
-    //gulp.src('images/*')
-        //.pipe(imagemin())
-        //.pipe(gulp.dest('assets/img'))
-//});
-
-
-//imagemin(['images/*.svg'], 'build/images', {
-//    use: [
-//        imageminSvgo({
-//            plugins: [
-//                {removeViewBox: false}
-//            ]
-//        })
-//    ]
-//}).then(() => {
-//    console.log('Images optimized');
-//});
-
-
-//gulp.task('images', function(cb) {
-//    gulp.src(['images/*.png','images/*.jpg','images/*.gif','images/*.jpeg']).pipe(imageop({
-//        optimizationLevel: 5,
-//        progressive: true,
-//        interlaced: true
-//    })).pipe(gulp.dest('assets/img')).on('end', cb).on('error', cb);
-//});
 
 
 /**
- * Compile files from _scss into both _site/css (for live injecting) and site (for future jekyll builds)
+ * Gulp task to minify HTML files
  */
-// gulp.task('sass', function () {
-//     return gulp.src('assets/css/main.scss')
-//         .pipe(sass({
-//             includePaths: ['css'],
-//             onError: browserSync.notify
-//         }))
-//         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
-//         .pipe(gulp.dest('_site/assets/css'))
-//         .pipe(browserSync.reload({stream:true}))
-//         .pipe(gulp.dest('assets/css'));
-// });
+gulp.task('htmlmin', function() {
+    return gulp.src('_site/**/*.html')
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            removeComments: true,
+            conservativeCollapse: true,
+            collapseBooleanAttributes: true,
+            removeRedundantAttributes: true,
+            removeEmptyAttributes: true,
+            removeEmptyElements: true,
+            lint: false,
+        }))
+        .pipe(gulp.dest('_site/'));
+});
 
 
 /**
- * Compile files from _scss into both _site/css (for live injecting) and site (for future jekyll builds)
+ * Gulp task to compile files from _scss into both _site/css and minify CSS files
  */
-
-// Gulp task to minify CSS files
 gulp.task('sass', function () {
     return gulp.src('assets/css/main.scss')
         .pipe(sass({
@@ -163,30 +142,39 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('assets/css'));
 });
 
-
-// // Gulp task to minify JavaScript files
-// gulp.task('scripts', function() {
-//   return gulp.src('assets/js/*.js')
-//     // Minify the file
-//     .pipe(uglify())
-//     // Output
-//     .pipe(gulp.dest('_site/assets/js'))
-//     .pipe(browserSync.reload({stream:true}))
-//     .pipe(gulp.dest('assets/js'));
+// gulp.task('build-js', function() {
+//     return gulp.src('_site/js/*.js')
+//         .pipe(jsValidate())
+//         .pipe(uglify())
+//         .pipe(gulp.dest('_site/js/'));
 // });
 
-// Gulp task to minify JavaScript files
-// gulp.task('compress', function(cb) {
-//   pump([
-//         gulp.src('assets/js/*.js'),
-//         uglify(),
-//         gulp.dest('_site/assets/js'),
-//         browserSync.reload({stream:true}),
-//         gulp.dest('assets/js')
-//     ],
-//     cb
-//   );
+
+
+
+// gulp.task('jekyll', shell.task(['jekyll build']));
+
+
+gulp.task('build', ['jekyll'], function() {
+    gulp.run('htmlmin');
+});
+
+// check tasks
+gulp.task('check-html', function() {
+    return gulp.src('_site/*.html')
+        .pipe(html5Lint())
+        .pipe(htmlhint())
+        .pipe(bootlint());
+});
+//
+// var scsslint = require('gulp-scss-lint');
+// gulp.task('check-scss', function() {
+//     gulp.src([ 'assets/css/**/*.scss' ])
+//         .pipe(scsslint())
 // });
+
+gulp.task('check', [ 'check-html' ], function() {});
+
 
 
 /**
@@ -216,26 +204,6 @@ gulp.task('pug', () => {
      gulp.watch('_pugfiles/**/*.pug', ['pug']);
  });
 
-
-
-//gulpfile.js
-
-gulp.task('check:deps', function() {
-    return gulp.src('package.json').pipe(checkDeps());
-});
-
-
-gulp.task('js', function(){
-  gulp.src(['app/assets/js/main.js'])
-    .pipe(resolveDependencies({
-      pattern: /\* @requires [\s-]*(.*\.js)/g
-    }))
-        .on('error', function(err) {
-            console.log(err.message);
-        })
-    .pipe(concat())
-    .pipe(gulp.dest('dest/assets/js/'));
-});
 
 
 /**
