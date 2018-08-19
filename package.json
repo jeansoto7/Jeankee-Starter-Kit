@@ -1,0 +1,59 @@
+{
+  "name": "jeankee-starter-kit",
+  "version": "0.0.1",
+  "description": "A starter kit including Jekyll, Gulp, SASS, Jade/Pug, Auto-Prefixer, BrowserSync, and more",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jean Soto",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.24.4",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "5.0.0",
+    "gulp-check-deps": "^1.4.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-csso": "^3.0.1",
+    "gulp-image-optimization": "^0.1.3",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-jstransformer": "^0.3.1",
+    "gulp-newer": "^1.4.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-resolve-dependencies": "^2.2.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.1",
+    "jstransformer-jade-jekyll": "^1.0.0",
+    "node-sass": "^4.9.3",
+    "popper.js": "^1.14.4",
+    "pug": "^2.0.3",
+    "pump": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeansoto7/jeankee-starter-kit.git"
+  },
+  "keywords": [
+    "jekyll",
+    "gulp",
+    "sass",
+    "jade",
+    "pug",
+    "auto-prefixer",
+    "imagecompressor",
+    "browsersync"
+  ],
+  "bugs": {
+    "url": "https://github.com/jeansoto7/jeankee-starter-kit/issues"
+  },
+  "homepage": "https://github.com/jeansoto7/jeankee-starter-kit",
+  "dependencies": {
+    "gulp-minify": "^3.1.0",
+    "imagemin-svgo": "^7.0.0",
+    "jquery": "1.9.1 - 3",
+    "node-prune": "^1.0.2",
+    "npm-check": "^5.8.0"
+  }
+}
