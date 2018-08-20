@@ -1,7 +1,7 @@
 markdown: kramdown
 highlighter: rouge
 encoding: utf-8
-exclude: ["node_modules", "vendor", "gulpfile.js", "package.json", "package-lock.json", "README.md"]
+exclude: ["node_modules", "files", "gulpfile.js", "package.json", "package-lock.json", "README.md"]
 permalink: pretty
 # baseurl: https://www.jeansoto.com
 baseurl: ''
