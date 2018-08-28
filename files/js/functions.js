@@ -1,5 +1,5 @@
 $(function() {
-  // fds
+  // fdsss
   smoothScroll(300);
 });
 

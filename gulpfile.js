@@ -1,35 +1,26 @@
 var gulp               = require('gulp');
 var plumber            = require('gulp-plumber');
 var newer              = require('gulp-newer');
+var concat             = require('gulp-concat');
 var childProcess       = require('child_process');
-var shell              = require('gulp-shell');
 var browserSync        = require('browser-sync');
-const minify           = require('gulp-minify');
-const pug              = require('pug');
-const jfm              = require('jstransformer-jade-jekyll');
+var pug                = require('pug');
+var jfm                = require('jstransformer-jade-jekyll');
 var gulpPug            = require('gulp-pug');
 
 var prefix             = require('gulp-autoprefixer');
 var sass               = require('gulp-sass');
 var minifyCss          = require('gulp-clean-css');
-var csso               = require('gulp-csso');
 var htmlmin            = require('gulp-htmlmin');
-var pump               = require('pump');
 var notify             = require("gulp-notify");
 
-var $                  = require('gulp-load-plugins')();
-var sourcemaps         = require('gulp-sourcemaps');
+// var $                  = require('gulp-load-plugins')();
+// var sourcemaps         = require('gulp-sourcemaps');
 var reload             = browserSync.reload;
-var scsslint           = require('gulp-scss-lint');
-var bootlint           = require('gulp-bootlint');
-var html5Lint          = require('gulp-html5-lint');
-var htmlhint           = require("gulp-htmlhint");
 
-var jshint             = require('gulp-jshint');
 var jsValidate         = require('gulp-jsvalidate');
 var uglify             = require('gulp-uglify');
 var rename             = require('gulp-rename');
-var concat             = require('gulp-concat');
 const size             = require('gulp-size');
 
 // Gulp-Imagemin Read Documentation and usage at https://www.npmjs.com/package/gulp-imagemin
@@ -41,8 +32,18 @@ const imageminSvgo     = require('imagemin-svgo');
 
 
 var jekyll              = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
-var checkDeps           = require('gulp-check-deps');
-var resolveDependencies = require('gulp-resolve-dependencies');
+
+////// uninstalled
+// var scsslint           = require('gulp-scss-lint');
+// var bootlint           = require('gulp-bootlint');
+// var html5Lint          = require('gulp-html5-lint');
+// var htmlhint           = require("gulp-htmlhint");
+// var csso               = require('gulp-csso');
+// var shell              = require('gulp-shell');
+// var pump               = require('pump');
+// const minify           = require('gulp-minify');
+// var checkDeps           = require('gulp-check-deps');
+// var resolveDependencies = require('gulp-resolve-dependencies');
 
 
 var messages            = {
@@ -266,81 +267,6 @@ gulp.task('pug', () => {
  * compile the jekyll site, launch BrowserSync & watch files.
  */
 gulp.task('default', ['browser-sync', 'watch']);
-
-//
-// var project = {
-//   name:'mom',
-//   url:'http://jeansoto.com',
-// };
-// var paths = {
-//   source  : './',
-//   assets   : './assets',
-//   files   : './files',
-//   vendor  : './vendor',
-//   site    : './_site',
-//   bower   : './bower-components'
-// };
-//
-// var replaceFileName = {
-//   css: [ project.name + '.css', project.name + '.min.css' ],
-//   js:  [ project.name + '.js', project.name + '.min.js' ]
-// };
-//
-// var del           = require('del');
-// var runSequence   = require('run-sequence');
-//
-//
-// // JavaScript
-// gulp.task('js', function() {
-//   return gulp.src('assets/js/**')
-//     .pipe(plumber())
-//     .pipe(sourcemaps.init())
-//     .pipe(concat('assets/js/**'))
-//     .pipe($.sourcemaps.write('assets/js/**'))
-//     .pipe(gulp.dest('assets/js/**'));
-// });
-//
-// // Lint JavaScript
-// gulp.task('jshint', function() {
-//   return gulp.src('assets/js/**')
-//     .pipe(reload({
-//       stream: true,
-//       once: true
-//     }))
-//     .pipe(jshint())
-//     .pipe(jshint.reporter('jshint-stylish'))
-//     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
-// });
-
-
-
-
-
-// gulp.task('build-js', function() {
-//     return gulp.src('_site/js/*.js')
-//         .pipe(jsValidate())
-//         .pipe(uglify())
-//         .pipe(gulp.dest('_site/js/'));
-// });
-
-
-// check tasks
-gulp.task('check-html', function() {
-    return gulp.src('_site/*.html')
-        .pipe(html5Lint())
-        .pipe(htmlhint())
-        .pipe(bootlint());
-});
-
-//
-// var scsslint = require('gulp-scss-lint');
-// gulp.task('check-scss', function() {
-//     gulp.src([ 'assets/css/**/*.scss' ])
-//         .pipe(scsslint())
-// });
-
-gulp.task('check', [ 'check-html' ], function() {});
-
 
 
 
