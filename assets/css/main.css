@@ -314,6 +314,7 @@ html {
 
 body {
   background: #f26522;
+  border: 100px solid purple;
   font-size: 0.9em;
   line-height: 1.5;
   font-family: 'Open Sans', sans-serif;

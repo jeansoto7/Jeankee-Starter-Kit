@@ -213,7 +213,6 @@ gulp.task('compress-js', function() {
 });
 
 
-
 // Optimize Images
 gulp.task('compress-img', function() {
   return gulp.src('files/img/**')
@@ -228,8 +227,8 @@ gulp.task('compress-img', function() {
     .pipe(size({
       title: 'img'
     }))
+    .pipe(notify({ message: 'Image compress complete' }))
 });
-
 
 
 /**
