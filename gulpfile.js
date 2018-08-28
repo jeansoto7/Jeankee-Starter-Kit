@@ -43,6 +43,8 @@ const imageminSvgo     = require('imagemin-svgo');
 var jekyll              = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
 var checkDeps           = require('gulp-check-deps');
 var resolveDependencies = require('gulp-resolve-dependencies');
+
+
 var messages            = {
     jekyllBuild: '<span style="color: grey">Running:</span> $ jekyll build'
 };
@@ -164,74 +166,12 @@ gulp.task('compress-html', function() {
         }))
 });
 
-///////////////////////////////////Originallllllll
-// gulp.task('sass', function () {
-//     return gulp.src('assets/css/main.scss')
-//         .pipe(sass({
-//             includePaths: ['css'],
-//             onError: browserSync.notify
-//         }))
-//         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true }))
-//         .pipe(gulp.dest('_site/assets/css'))
-//         .pipe(browserSync.reload({stream:true}))
-//         .pipe(gulp.dest('assets/css'));
-// });
-
 /**
  * Gulp task to compile files from _scss into both _site/css and minify CSS files
  */
-// gulp.task('sass', function () {
-//     return gulp.src('assets/css/main.scss')
-//         .pipe(plumber())
-//         .pipe(sass({
-//             includePaths: ['css'],
-//             onError: browserSync.notify
-//         }))
-//         // Auto-prefix css styles for cross browser compatibility
-//         .pipe(prefix({browsers: AUTOPREFIXER_BROWSERS}, { cascade: true }))
-//         // Minify the file
-//         .pipe(csso())
-//         .pipe(rename(function (path) {
-//             if(path.extname === '.css') {
-//                 path.basename += '.min';
-//             }
-//         }))
-//         // Output
-//         .pipe(gulp.dest('_site/assets/css'))
-//         .pipe(browserSync.reload({stream:true}))
-//         .pipe(gulp.dest('assets/css'));
-// });
-
-// gulp.task('sass', function () {
-//     return gulp.src('assets/css/_main.scss')
-//         .pipe(plumber())
-//         .pipe(sass({
-//             outputStyle: 'expanded',
-//             includePaths: ['css'],
-//             onError: browserSync.notify
-//         }))
-//         .pipe(prefix({browsers: AUTOPREFIXER_BROWSERS}, { cascade: true }))
-//         .pipe(gulp.dest('assets/css'));
-// });
-// //
-// gulp.task('compress-css', function () {
-//     return gulp.src('assets/css/main.css')
-//         // .pipe(rename('main.min.css'))
-//         .pipe(rename({suffix: '.min'}))
-//         .pipe(minifyCss())
-//         .pipe(size({
-//           title: 'css-compress'
-//         }))
-//         // Output
-//         .pipe(gulp.dest('assets/css'))
-//         .pipe(browserSync.reload({stream:true}));
-// });
-
 gulp.task('sass', function () {
     return gulp.src('assets/css/main.scss')
         .pipe(plumber({errorHandler: onError}))
-        // .pipe(sourcemaps.init())
-        // .pipe(sourcemaps.write(('./files/css')))
         .pipe(sass({
             outputStyle: 'expanded',
             includePaths: ['css'],
@@ -242,22 +182,15 @@ gulp.task('sass', function () {
         .pipe(rename({suffix: '.min'}))
         // .pipe(rename('main.min.css'))
         .pipe(minifyCss())
+        .pipe(size({
+          title: 'css-compress'
+        }))
         .pipe(gulp.dest('assets/css'))
         .pipe(gulp.dest('_site/assets/css'))
         .pipe(browserSync.reload({stream:true}))
         .pipe(gulp.dest('assets/css'));
         // .pipe(notify({ message: 'Styles task complete' }));
 });
-
-// gulp.task('compress-css', function () {
-//     return gulp.src('assets/css/main.css')
-//         .pipe(minifyCss())
-//         .pipe(rename('main.min.css'))
-//         // .pipe(rename({suffix: '.min'}))
-//         .pipe(gulp.dest('assets/css'))
-//         .pipe(browserSync.reload({stream:true}));
-// });
-
 
 /**
  * Gulp task to minify JS files
