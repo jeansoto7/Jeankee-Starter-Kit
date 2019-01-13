@@ -3,25 +3,26 @@ var plumber            = require('gulp-plumber');
 var newer              = require('gulp-newer');
 var concat             = require('gulp-concat');
 var childProcess       = require('child_process');
+
 var browserSync        = require('browser-sync');
+var rename             = require('gulp-rename');
+var notify             = require("gulp-notify");
+
 var pug                = require('pug');
 var jfm                = require('jstransformer-jade-jekyll');
 var gulpPug            = require('gulp-pug');
 
+var htmlmin            = require('gulp-htmlmin');
+
 var prefix             = require('gulp-autoprefixer');
 var sass               = require('gulp-sass');
 var minifyCss          = require('gulp-clean-css');
-var htmlmin            = require('gulp-htmlmin');
-var notify             = require("gulp-notify");
-
-// var $                  = require('gulp-load-plugins')();
-// var sourcemaps         = require('gulp-sourcemaps');
-var reload             = browserSync.reload;
 
 var jsValidate         = require('gulp-jsvalidate');
 var uglify             = require('gulp-uglify');
-var rename             = require('gulp-rename');
 const size             = require('gulp-size');
+// var $                  = require('gulp-load-plugins')();
+// var sourcemaps         = require('gulp-sourcemaps');
 
 // Gulp-Imagemin Read Documentation and usage at https://www.npmjs.com/package/gulp-imagemin
 const imagemin         = require('gulp-imagemin');
@@ -30,8 +31,8 @@ const imageminJpegtran = require('imagemin-jpegtran');
 const imageminOptipng  = require('imagemin-optipng');
 const imageminSvgo     = require('imagemin-svgo');
 
-
-var jekyll              = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
+var reload             = browserSync.reload;
+var jekyll             = process.platform === 'win32' ? 'jekyll.bat' : 'jekyll';
 
 ////// uninstalled
 // var scsslint           = require('gulp-scss-lint');
@@ -193,6 +194,32 @@ gulp.task('sass', function () {
         // .pipe(notify({ message: 'Styles task complete' }));
 });
 
+
+//
+// gulp.task('sass', function () {
+//    return gulp.src('assets/css/main.scss')
+//        .pipe(plumber({errorHandler: onError}))
+//        .pipe(sass({
+//            outputStyle: 'expanded',
+//            includePaths: ['css'],
+//            onError: browserSync.notify
+//        }))
+//        .pipe(prefix({browsers: AUTOPREFIXER_BROWSERS}, { cascade: true }))
+//        .pipe(gulp.dest('assets/css'))
+//        .pipe(rename({suffix: '.min'}))
+//        // .pipe(rename('main.min.css'))
+//        .pipe(minifyCss())
+//        .pipe(size({
+//          title: 'css-compress'
+//        }))
+//        .pipe(gulp.dest('assets/css'))
+//        // .pipe(gulp.dest('_site/assets/css'))
+//        .pipe(browserSync.reload({stream:true}));
+//        // .pipe(gulp.dest('assets/css'));
+//        // .pipe(notify({ message: 'Styles task complete' }));
+// });
+
+
 /**
  * Gulp task to minify JS files
  */
@@ -250,15 +277,14 @@ gulp.task('pug', () => {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
  gulp.task('watch', function () {
-     gulp.watch(['*.html', '_layouts/*.html', '_includes/*','assets/**/*', '_posts/*', '_config.yml'], ['jekyll-rebuild']);
      gulp.watch('assets/css/**', ['sass']);
-     // gulp.watch('assets/css/**', ['compress-css']);
      gulp.watch(['files/js/**'], ['compress-js']);
+     // gulp.watch(['assets/js/**'], ['jekyll-rebuild']);
      gulp.watch(['files/img/**'], ['compress-img']);
-     gulp.watch(['assets/js/**'], ['jekyll-rebuild']);
      gulp.watch('_jadefiles/**/*.jade', ['jade']);
      gulp.watch('_pugfiles/**/*.pug', ['pug']);
      gulp.watch(['_site/**/*.html'], ['compress-html']);
+     gulp.watch(['*.html', '_layouts/*.html', '_includes/*','assets/**/*', '_posts/*', '_config.yml'], ['jekyll-rebuild']);
  });
 
 /**
@@ -266,6 +292,81 @@ gulp.task('pug', () => {
  * compile the jekyll site, launch BrowserSync & watch files.
  */
 gulp.task('default', ['browser-sync', 'watch']);
+
+//
+// var project = {
+//   name:'mom',
+//   url:'http://jeansoto.com',
+// };
+// var paths = {
+//   source  : './',
+//   assets   : './assets',
+//   files   : './files',
+//   vendor  : './vendor',
+//   site    : './_site',
+//   bower   : './bower-components'
+// };
+//
+// var replaceFileName = {
+//   css: [ project.name + '.css', project.name + '.min.css' ],
+//   js:  [ project.name + '.js', project.name + '.min.js' ]
+// };
+//
+// var del           = require('del');
+// var runSequence   = require('run-sequence');
+//
+//
+// // JavaScript
+// gulp.task('js', function() {
+//   return gulp.src('assets/js/**')
+//     .pipe(plumber())
+//     .pipe(sourcemaps.init())
+//     .pipe(concat('assets/js/**'))
+//     .pipe($.sourcemaps.write('assets/js/**'))
+//     .pipe(gulp.dest('assets/js/**'));
+// });
+//
+// // Lint JavaScript
+// gulp.task('jshint', function() {
+//   return gulp.src('assets/js/**')
+//     .pipe(reload({
+//       stream: true,
+//       once: true
+//     }))
+//     .pipe(jshint())
+//     .pipe(jshint.reporter('jshint-stylish'))
+//     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+// });
+
+
+
+
+
+// gulp.task('build-js', function() {
+//     return gulp.src('_site/js/*.js')
+//         .pipe(jsValidate())
+//         .pipe(uglify())
+//         .pipe(gulp.dest('_site/js/'));
+// });
+
+
+// // check tasks
+// gulp.task('check-html', function() {
+//     return gulp.src('_site/*.html')
+//         .pipe(html5Lint())
+//         .pipe(htmlhint())
+//         .pipe(bootlint());
+// });
+//
+// //
+// // var scsslint = require('gulp-scss-lint');
+// // gulp.task('check-scss', function() {
+// //     gulp.src([ 'assets/css/**/*.scss' ])
+// //         .pipe(scsslint())
+// // });
+//
+// gulp.task('check', [ 'check-html' ], function() {});
+
 
 
 

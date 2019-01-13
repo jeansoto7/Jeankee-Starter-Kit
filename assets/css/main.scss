@@ -2,10 +2,11 @@
 
 
 // 0 - Tools
-@import "0-tools/bourbon/bourbon";
+@import "0-tools/bourbon/bourbon"; //Documentation here https://www.bourbon.io/docs/4 (I wasn't satisfies with v5, sticking with v4S)
 @import "0-tools/neat/neat";
+@import "0-tools/bootstrap/bootstrap-grid"; //Choose which bootstrap pack you want, all are availble in 0-tools/bootstrap. Documentation here https://getbootstrap.com/docs/4.1/layout/overview/
 @import "0-tools/fonts";
-@import "0-tools/normalize";
+// @import "0-tools/normalize";
 @import "0-tools/vars";
 @import "0-tools/color-vars";
 
