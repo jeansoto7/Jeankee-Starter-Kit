@@ -2,13 +2,9 @@
 
 
 // 0 - Tools
-<<<<<<< HEAD
 $output-bourbon-deprecation-warnings: false !default;
 
-@import "0-tools/bourbon/bourbon"; //Documentation here https://www.bourbon.io/docs/4 (I wasn't satisfied with v5, sticking with v4)
-=======
 @import "0-tools/bourbon/bourbon"; //Documentation here https://www.bourbon.io/docs/4 (I wasn't satisfies with v5, sticking with v4S)
->>>>>>> 11867e35e751920c1c4a62bdcfa6618dedbb95fe
 @import "0-tools/neat/neat";
 @import "0-tools/bootstrap/bootstrap-grid"; //Choose which bootstrap pack you want, all are availble in 0-tools/bootstrap. Documentation here https://getbootstrap.com/docs/4.1/layout/overview/
 @import "0-tools/fonts";

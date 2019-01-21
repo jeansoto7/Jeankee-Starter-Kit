@@ -5,4 +5,5 @@ exclude: ["node_modules", "files", "assets/css/main.scss", "assets/css/main.css"
 permalink: pretty
 # baseurl: https://www.tetronian.com
 baseurl: ''
-source: C:\Users\jeanc\Websites\coming-soon-tetronian
+# baseurl: C:/Users/jeanc/Websites/coming-soon-tetronian/_site
+# source: C:/Users/jeanc/Websites/coming-soon-tetronian/_site
