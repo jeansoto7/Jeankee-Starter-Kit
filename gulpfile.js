@@ -153,7 +153,7 @@ gulp.task('compress-html', function() {
             removeComments: true,
             conservativeCollapse: true,
             collapseBooleanAttributes: true,
-            // removeRedundantAttributes: true,
+            removeRedundantAttributes: true,
             removeEmptyAttributes: true,
             // removeEmptyElements: true,
             removeOptionalTags: true,
