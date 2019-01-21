@@ -3,3 +3,38 @@
 
 .transparent
   opacity: 0
+
+.form-display
+
+  input[type="text"],
+  input[type="email"]
+    border: none
+    background: none
+    width: 100%
+    color: $tet-lightgrey
+
+  .mc-field-group
+    position: relative
+
+    label
+      margin: 0
+      +transform(translateY(-50%))
+      +position(absolute, 50% null null 0)
+      pointer-events: none
+      transition: all 0.3s ease-in-out
+      color: $tet-lightgrey
+
+    input[type="text"],
+    input[type="email"],
+    label
+      font-style: italic
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active
+    -webkit-text-fill-color: $tet-lightgrey
+
+.glitchOut
+  display: none
+  // border: 2px solid red

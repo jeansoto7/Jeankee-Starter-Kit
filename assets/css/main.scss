@@ -2,10 +2,17 @@
 
 
 // 0 - Tools
-@import "0-tools/bourbon/bourbon";
+<<<<<<< HEAD
+$output-bourbon-deprecation-warnings: false !default;
+
+@import "0-tools/bourbon/bourbon"; //Documentation here https://www.bourbon.io/docs/4 (I wasn't satisfied with v5, sticking with v4)
+=======
+@import "0-tools/bourbon/bourbon"; //Documentation here https://www.bourbon.io/docs/4 (I wasn't satisfies with v5, sticking with v4S)
+>>>>>>> 11867e35e751920c1c4a62bdcfa6618dedbb95fe
 @import "0-tools/neat/neat";
+@import "0-tools/bootstrap/bootstrap-grid"; //Choose which bootstrap pack you want, all are availble in 0-tools/bootstrap. Documentation here https://getbootstrap.com/docs/4.1/layout/overview/
 @import "0-tools/fonts";
-@import "0-tools/normalize";
+// @import "0-tools/normalize";
 @import "0-tools/vars";
 @import "0-tools/color-vars";
 
@@ -18,14 +25,20 @@
 @import "1-base/common-styles";
 
 
-// 2 - Modules
-// @import "2-modules/flex-video";
-
-// 3 - Sections
-// @import "3-sections/header";
-
 // 4 - layouts
 @import "4-layouts/home";
+@import "4-layouts/header";
+@import "4-layouts/sliced-content";
+@import "4-layouts/trying";
+@import "4-layouts/loader";
+
+
+// 3 - Sections
+@import "3-sections/subscribe-form";
+
+
+// 2 - Modules
+@import "2-modules/animations";
 
 // Font Awesome
-@import "0-tools/fontawesome/fontawesome";
+// @import "0-tools/fontawesome/fontawesome";

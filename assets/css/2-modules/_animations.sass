@@ -1,0 +1,131 @@
+//-------------------- Transitions
+.sliced-content.zoom-out
+  transform: scale3d(0.7,0.7,1)
+
+.notify.is-opened
+  opacity: 1
+  pointer-events: auto
+
+.notify .mc-field-group input,
+.contact-box .mc-field-group input
+  transform-origin: 0% 50%
+
+.notify.is-opened .mc-field-group input,
+.contact-box .mc-field-group input
+  animation: lineTransition 1s ease-in-out
+
+
+//-------------------- Notify Animations
+
+//// Forwards notify animations ////////////////////////////////////////////////
+.notify.is-opened .mc-field-group label,
+#typewriter
+  animation: typewriter 1s steps(22) 1s 1 normal both, blinkTextCursor 500ms steps(22) infinite normal, border-fade 1.2s forwards 1s
+  white-space: nowrap
+  overflow: hidden
+
+.notify.is-opened .mc-field-group .button,
+#button-slide
+  animation: button-fade-in 1s forwards 1s
+
+.notify.is-opened .notify-box::before
+  animation: lineWidthBefore 1s forwards 0.5s, lineHeightBefore 1s forwards 1.5s
+
+.notify.is-opened .notify-box::after
+  animation: lineHeightAfter 1s forwards 0.5s, lineWidthAfter 1s forwards 1.5s
+
+
+//// Reverse notify animations ////////////////////////////////////////////////
+// .notify.is-opened .mc-field-group label
+//   animation: typewriter 0.25s steps(22) 0.25s 1 reverse both, blinkTextCursor 500ms steps(22) infinite reverse, border-fade 1.2s reverse 0.25s
+//
+// .notify.is-closed .mc-field-group .button
+//   animation: button-fade-in 0.25s reverse 0.25s
+//
+// .notify.is-closed .notify-box::before
+//   animation: lineWidthBefore 0.25s reverse 0.125s, lineHeightBefore 0.25s reverse 0.5s
+//
+// .notify.is-closed .notify-box::after
+//   animation: lineHeightAfter 0.25s reverse 0.125s, lineWidthAfter 0.25s reverse 0.5s
+
+
+// .rotating
+//   width: 20%
+//   border: 2px solid red
+//   animation: rotating 2s linear infinite
+//   transform-origin: center
+//
+// //-------------------- Loader
+// @keyframes rotating
+//   from
+//     transform: scale(0.5)
+//     opacity: 0
+//   to
+//     transform: scale(1)
+//     opacity: 1
+
+
+//-------------------- Typewritter
+@keyframes typewriter
+  from
+    width: 0
+  to
+    width: $base-spacing*5.5
+
+@keyframes blinkTextCursor
+  // from
+    // border-right-color: $tet-blackorange
+  to
+    border-right-color: transparent
+
+@keyframes border-fade
+  99%
+    border-right-color: inherit
+  100%
+    border-right-color: transparent
+
+//-------------------- Others
+@keyframes button-fade-in
+  100%
+    transform: translateX(0)
+    opacity: 1
+
+@keyframes lineTransition
+  from
+    transform: scale3d(0,1,1)
+  to
+    transform: scale3d(1,1,1)
+
+
+//-------------------- Box Line Transition
+@keyframes lineWidthBefore
+  0%
+    border-top-color: $tet-pureorange
+  100%
+    width: 100%
+    border-top-color: $tet-pureorange
+    // transition: width 0.25s ease-out
+
+@keyframes lineHeightBefore
+  0%
+    border-right-color: $tet-pureorange
+  100%
+    height: 100%
+    border-right-color: $tet-pureorange
+    // transition: height 0.25s ease-out
+
+@keyframes lineWidthAfter
+  0%
+    border-bottom-color: $tet-pureorange
+  100%
+    border-bottom-color: $tet-pureorange
+    width: 100%
+    // transition: width 0.25s ease-out
+
+@keyframes lineHeightAfter
+  0%
+    border-left-color: $tet-pureorange
+  100%
+    height: 100%
+    border-left-color: $tet-pureorange
+    // transition: height 0.25s ease-out

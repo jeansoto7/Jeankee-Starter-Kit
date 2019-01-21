@@ -3,9 +3,54 @@ mixin nav-content()
     li: a(href="{{site.baseurl}}/") About
 
 header
-  .header-position
-    h1 Jeankee Starter Kit
-    .fas.fa-car
-
-    nav.site-nav
-      +nav-content()
+  //- .header-position  
+  .tetronian-logo
+    a(href="{{site.baseurl}}/")
+      img(src="{{site.baseurl}}/assets/img/logos/tetronian-logo.svg", title="Tetronian", alt="Tetronian").logo
+      //- img(src="{{site.baseurl}}/assets/img/tetronian-logotype.svg", title="Tetronian", alt="Tetronian").logotype
+  .social-media
+    //- .grid-item
+    //-   a(target="_blank" href="https://www.instagram.com/tetronian/").slash
+    //-     .fab.fa-instagram
+    //- .grid-item
+    //-   a(target="_blank" href="https://www.facebook.com/tetronian/").slash
+    //-     .fab.fa-facebook-f
+    //- .grid-item
+    //-   a(target="_blank" href="https://www.twitter.com/tetronian/").slash
+    //-     .fab.fa-twitter
+    //- .grid-item
+    //-   a(target="_blank" href="http://tetronian.tumblr.com/").slash
+    //-     .fab.fa-tumblr
+    //- .grid-item
+    //-   a(target="_blank" href="https://www.pinterest.com/tetronian/").slash
+    //-     .fab.fa-pinterest-p
+    //- .grid-item
+    //-   a(target="_blank" href="https://plus.google.com/+tetronian").slash
+    //-     .fab.fa-google-plus-g
+    .grid-item
+      a(target="_blank" href="https://www.instagram.com/tetronian/").slash
+        img(src="{{site.baseurl}}/assets/img/icons/instagram.svg", title="Instagram", alt="Instagram")
+    .grid-item
+      a(target="_blank" href="https://www.facebook.com/tetronian/").slash
+        img(src="{{site.baseurl}}/assets/img/icons/facebook-f.svg", title="Facebook", alt="Facebook")
+    .grid-item
+      a(target="_blank" href="https://www.twitter.com/tetronian/").slash
+        img(src="{{site.baseurl}}/assets/img/icons/twitter.svg", title="Twitter", alt="Twitter")
+    .grid-item
+      a(target="_blank" href="http://tetronian.tumblr.com/").slash
+        img(src="{{site.baseurl}}/assets/img/icons/tumblr.svg", title="Tumblr", alt="Tumblr")
+    .grid-item
+      a(target="_blank" href="https://www.pinterest.com/tetronian/").slash
+        img(src="{{site.baseurl}}/assets/img/icons/pinterest-p.svg", title="Pinterest", alt="Pinterest")
+    .grid-item
+      a(target="_blank" href="https://plus.google.com/+tetronian").google-plus.slash
+        img(src="{{site.baseurl}}/assets/img/icons/google-plus.svg", title="Google+", alt="Google+")
+    
+  .mobile-nav-toggle
+    span
+    //- h1 Tetroniansasa
+    //- .fas.fa-car
+    //- 
+    //- nav.site-nav
+    //-   +nav-content()
+    

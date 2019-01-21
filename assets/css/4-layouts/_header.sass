@@ -1,0 +1,67 @@
+header
+  // background: pink
+  width: 5%
+  padding: $base-spacing $base-spacing/2
+  position: relative
+  z-index: 5
+  box-shadow: 0px 2px 4px 1px rgba(#220000, 0.4)
+
+  .tetronian-logo
+    // height: 60%
+  //   margin: 10%
+
+    a
+      // display: block
+
+  .social-media
+    display: flex
+    flex-direction: column
+    text-align: center
+    // align-items: center
+    // justify-content: center
+    position: absolute
+    bottom: 0
+    // z-index: -1
+    right: 50%
+    transform: translateX(50%)
+    // height: 40%
+    padding: inherit
+
+    .grid-item
+      position: relative
+      -webkit-transform: translate3d(0,0,0)
+      /* Solves Safari bug because of SVG clipping mask */
+
+    .fab
+      margin: $base-spacing/4 0
+      color: $tet-blackorange
+      // transition: $base-transition2
+
+    // .slash:hover
+    //   color: $tet-logoorange2
+
+    img
+      height: $base-spacing
+
+    .slash::before
+      content: ''
+      position: absolute
+      height: $base-spacing/4
+      width: 120%
+      top: 50%
+      // margin-top: -10px
+      left: -10%
+      z-index: -1
+      background: $tet-pureorange
+      transform: rotate3d(0, 0, 1, -45deg) scale3d(0, 1, 1)
+      transition: transform 0.5s
+
+    .slash:hover::before
+      transform: rotate3d(0, 0, 1, -45deg) scale3d(1, 1, 1)
+
+    .google-plus img
+      height: $base-spacing*.9
+
+
+  .mobile-nav-toggle
+    display: none
